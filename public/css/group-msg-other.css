@@ -1,0 +1,23 @@
+
+#MyTable {
+    position: absolute;
+    width: 935px;
+    max-width: 935px;
+    max-height: 100px;
+    overflow-y: auto;
+    display: block;
+}
+
+#MyTable td {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+#MyTable th {
+    background-color: #75359c;
+    text-align: left;
+}
+
+#MyTable tr:nth-child(even) {
+    background-color: #62149a;
+}
