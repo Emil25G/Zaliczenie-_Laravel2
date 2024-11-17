@@ -5,7 +5,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 
-
+//Start strony
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 
 // Widok czatu i lista użytkowników

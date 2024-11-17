@@ -10,7 +10,12 @@
                         <span>{{ $user->fname . ' ' . $user->lname }}</span>
                         <p>{{ $user->status }}</p>
                     </div>
-                    <a href="{{ route('logout') }}" class="logout">Wyloguj się</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Wyloguj się</button>
+                    </form>
+                    
+                                    
                 </div>
             </header>
 

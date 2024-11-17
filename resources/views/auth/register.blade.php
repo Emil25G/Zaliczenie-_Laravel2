@@ -69,10 +69,12 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
                 <div class="field button">
                     <input type="submit" value="Zarejestruj się">
                 </div>
-            </form>
+                </form>
             <div class="link">Masz już konto? <a href="{{ route('login') }}">Zaloguj się!</a></div>
         </section>
     </div>
