@@ -8,9 +8,9 @@
     font-family: 'Poppins', sans-serif;
 }
 body{
-    display: flex;
+    /*display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
     min-height: 100vh;
     background: #c48ee0;
     border: #000;
@@ -549,3 +549,19 @@ body{
     width: 50%; /* Określa szerokość okna modalnego */
     height: 85%; /* Określa wysokość okna modalnego */
 }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column; /* Układ pionowy: kontener .users nad .right-panel */
+    }
+
+    /* Zmiana szerokości panelu bocznego */
+    .right-panel {
+        width: 100%; /* Panel boczny zajmuje całą szerokość na małych ekranach */
+        margin-top: 20px; /* Opcjonalnie dodajemy margines, by oddzielić sekcje */
+    }
+
+    .users {
+        width: 100%; /* Upewniamy się, że .users zajmuje całą szerokość */
+    }
+

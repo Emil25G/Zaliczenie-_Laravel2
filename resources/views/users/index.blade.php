@@ -12,7 +12,7 @@
                     </div>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Wyloguj się</button>
+                        <button type="submit" class="logout btn btn-danger">Wyloguj się</button>
                     </form>
                     
                                     
@@ -40,7 +40,7 @@
             </div>
         </section>
 
-        <aside class="right-panel">
+        <div class="right-panel">
             <div class="panel-header">
             </div>
             @if (auth()->user()->role == 'nauczyciel' || auth()->user()->role == 'admin')
@@ -67,7 +67,7 @@
                         </table>
                         <link rel="stylesheet" href="{{ asset('css/group-msg-other.css') }}">
                     </div>
-                    @endif
+            @endif
                     @if (auth()->user()->role == 'uczeń')
                         <h2>Tablica ogłoszeń:</h2>
                         <table class="table" id="MyTable">
@@ -81,7 +81,7 @@
                         @include('users.userslist')
                     @endif
                 </div>
-        </aside>
+            </div>
     </div>
 @endsection
 

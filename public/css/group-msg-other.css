@@ -1,11 +1,11 @@
 
 #MyTable {
-    position: absolute;
-    width: 935px;
-    max-width: 935px;
-    max-height: 100px;
-    overflow-y: auto;
-    display: block;
+    width:auto;
+    max-width: 700px;
+    min-width: 300px;
+    margin:auto;
+    overflow-y: 2px;
+
 }
 
 #MyTable td {
