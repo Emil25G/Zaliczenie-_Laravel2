@@ -244,7 +244,7 @@ body{
     pointer-events: none;
     transition: all 0.2s ease;
 }
-.users .search input.show{
+.users .search input{ /* było input.show*/
     opacity: 1;
     pointer-events: auto;
 }

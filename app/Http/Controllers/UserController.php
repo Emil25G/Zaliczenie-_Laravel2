@@ -125,4 +125,25 @@ class UserController extends Controller
         // Przekierowanie po usunięciu, np. na stronę z listą użytkowników
         return redirect()->route('users.index')->with('success', 'Użytkownik został usunięty.');
     }
+
+    public function update(Request $request, $id)
+{
+    // Walidacja danych
+    $validated = $request->validate([
+        'fname' => 'required|string|max:255',
+        'lname' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email,' . $id,
+    ]);
+
+    // Znalezienie użytkownika i zaktualizowanie danych
+    $user = User::findOrFail($id);
+    $user->fname = $request->input('fname');
+    $user->lname = $request->input('lname');
+    $user->email = $request->input('email');
+    $user->save();
+
+    // Przekierowanie z komunikatem o sukcesie
+    return redirect()->route('users.index')->with('success', 'Użytkownik został zaktualizowany!');
+}
+
 }

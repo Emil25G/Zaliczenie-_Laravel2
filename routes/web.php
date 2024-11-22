@@ -20,6 +20,8 @@ Route::post('/users/search', [UserController::class, 'search'])->name('users.sea
 Route::get('/users/getUsers', [UserController::class, 'getUsers'])->middleware('auth');
 // Trasa usuwania użytkownika
 Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+// Trasa do edycji
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
 Route::post('/save', [ChatController::class, 'saveMessage']);
 Route::get('/process', [ChatController::class, 'getMessages']);
