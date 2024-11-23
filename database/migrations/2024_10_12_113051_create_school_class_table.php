@@ -9,10 +9,11 @@ class CreateSchoolClassTable extends Migration
     public function up()
     {
         Schema::create('school_class', function (Blueprint $table) {
-            $table->id(); // Unikalne ID klasy
-            $table->unsignedBigInteger('teacher_id')->nullable(); // ID nauczyciela
-            $table->string('class_name'); // Nazwa klasy np. A, B, C
-            $table->string('grade'); // Numer klasy np. 1, 2, 3 itd.
+            $table->id();
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->string('full_class_name');
+            $table->string('class_name');
+            $table->string('grade');
             $table->timestamps();
         });
     }

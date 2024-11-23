@@ -14,8 +14,8 @@
                         @csrf
                         <button type="submit" class="logout btn btn-danger">Wyloguj się</button>
                     </form>
-                    
-                                    
+
+
                 </div>
             </header>
 
@@ -51,6 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="other-tab" data-toggle="tab" href="#my-class" role="tab">Moja klasa</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="add-catalogs" data-toggle="tab" href="#add-new-users" role="tab">Katalog indeksów</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content">
@@ -79,6 +82,7 @@
                         @include('users.classlist')
                     @elseif (auth()->user()->role == 'admin')
                         @include('users.userslist')
+                        @include('users.add-users')
                     @endif
                 </div>
             </div>

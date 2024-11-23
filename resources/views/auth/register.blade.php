@@ -33,17 +33,16 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Numer indeksu zamiast roli -->
                 <div class="field input">
-                    <label>Typ użytkownika</label>
-                    <select name="role" required>
-                        <option value="uczeń">Uczeń</option>
-                        <option value="nauczyciel">Nauczyciel</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                    @error('role')
+                    <label>Numer indeksu</label>
+                    <input type="text" name="index_number" placeholder="Podaj numer indeksu" required value="{{ old('index_number') }}">
+                    @error('index_number')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+
                 <div class="field input">
                     <label>Adres email</label>
                     <input type="email" name="email" placeholder="Podaj adres email" required value="{{ old('email') }}">
@@ -69,12 +68,10 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
                 <div class="field button">
                     <input type="submit" value="Zarejestruj się">
                 </div>
-                </form>
+            </form>
             <div class="link">Masz już konto? <a href="{{ route('login') }}">Zaloguj się!</a></div>
         </section>
     </div>

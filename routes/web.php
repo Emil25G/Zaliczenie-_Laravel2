@@ -22,6 +22,9 @@ Route::get('/users/getUsers', [UserController::class, 'getUsers'])->middleware('
 Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 // Trasa do edycji
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+// Trasa do dodania indeksów uzytkowników
+Route::post('/users/save', [UserController::class, 'saveUsers'])->name('users.save');
+
 
 Route::post('/save', [ChatController::class, 'saveMessage']);
 Route::get('/process', [ChatController::class, 'getMessages']);
@@ -39,3 +42,6 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/users/add', [UserController::class, 'showAddForm'])->name('users.add');
+Route::post('/users/import', [UserController::class, 'importCSV'])->name('users.importCSV');

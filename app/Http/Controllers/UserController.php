@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserIndex;
+use App\Models\SchoolClass;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -79,7 +82,7 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        $outgoing_id = Auth::id(); // ID aktualnie zalogowanego użytkownika
+        $outgoing_id = Auth::id();
         $users = User::where('id', '!=', $outgoing_id)->orderBy('id', 'DESC')->get();
 
         // Generowanie HTML
@@ -128,22 +131,42 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
 {
-    // Walidacja danych
+
     $validated = $request->validate([
         'fname' => 'required|string|max:255',
         'lname' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $id,
     ]);
 
-    // Znalezienie użytkownika i zaktualizowanie danych
     $user = User::findOrFail($id);
     $user->fname = $request->input('fname');
     $user->lname = $request->input('lname');
     $user->email = $request->input('email');
     $user->save();
 
-    // Przekierowanie z komunikatem o sukcesie
     return redirect()->route('users.index')->with('success', 'Użytkownik został zaktualizowany!');
 }
+    public function saveUsers(Request $request)
+    {
+        $users = json_decode($request->input('users'), true);
+
+        foreach ($users as $userData) {
+            $schoolClass = SchoolClass::where('full_class_name', $userData['class'])->first();
+            $schoolIndex = UserIndex::where('index', $userData['index'])->exists();
+            if ($schoolClass && !$schoolIndex) {
+                UserIndex::create([
+                    'class_id' => $schoolClass->id,
+                    'index' => $userData['index'],
+                    'status' => $userData['status'],
+                ]);
+            } else {
+                continue;
+            }
+        }
+
+        return response()->json(['message' => 'Indeksy użytkowników zostały zapisane.']);
+    }
+
 
 }
+

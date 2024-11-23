@@ -1,0 +1,80 @@
+/* Tabela .user-list-table */
+.user-list-table {
+    width: 100%;
+    word-wrap: break-word;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background-color: #ddd;
+    border-style: hidden;
+    color: black;
+    max-height: 400px; /* Maksymalna wysokość tabeli */
+    overflow-y: auto;  /* Pojawi się suwak, jeśli zawartość przekroczy wysokość */
+    display: block; /* Aby pozwolić na przewijanie */
+}
+
+/* Nagłówki tabeli */
+.user-list-table td, .user-list-table th {
+    border: 2px solid white;
+    padding: 8px;
+    word-wrap: break-word;
+    text-align: center;
+    white-space: normal; /* Zawijanie tekstu */
+}
+
+/* Kolejność kolumn */
+.user-list-table td:nth-child(2) {
+    text-align: left;
+}
+
+.user-list-table td:nth-child(1),
+.user-list-table td:nth-child(3) {
+    width: 11%;
+}
+
+.user-list-table tr:hover {
+    background-color: #c48ee0;
+    color: white;
+}
+
+/* Nagłówek tabeli */
+.user-list-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #75359c;
+    color: white;
+    word-wrap: break-word;
+    border: 2px solid white;
+}
+
+.user-list-table tbody {
+    position: relative;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .user-list-table thead {
+        display: none;
+    }
+    .user-list-table tbody td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+        border-top: none;
+        position: relative;
+    }
+    .user-list-table tbody td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #666;
+    }
+    .user-list-table tbody tr {
+        display: block;
+        margin-bottom: 10px;
+        background-color: #ddd;
+    }
+}
+
+
