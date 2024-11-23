@@ -476,12 +476,6 @@ body{
 
 }
 
-@media screen and (max-width: 780px) {
-    .modal-content{
-        margin-left:50%;
-    }
-}
-
 /* modal */
 .modal-content {
     background-color: #f1f1f1;
@@ -489,6 +483,12 @@ body{
     width: 180%;
     position: absolute;
     left: -40%;
+}
+
+
+.modal-backdrop {
+    opacity: 0 !important; /* Ukryj tło */
+    z-index: -1 !important; /* Przesuń tło za stronę */
 }
 
 .form-control {
@@ -566,11 +566,6 @@ body{
     border: 2px solid white;
 }
 
-.modal-dialog {
-    width: 50%;
-    height: 85%;
-}
-
 .custom-btn {
     background-color: #136fc8; /* Kolor tła */
     color: #0c76dd; /* Kolor tekstu */
@@ -632,6 +627,10 @@ body{
     color: white;
     word-wrap: break-word;
     border: 2px solid white;
+}
+
+.user-list-table tbody{
+    position: relative;
 }
 
 /* Dostosowanie dla mniejszych ekranów */
