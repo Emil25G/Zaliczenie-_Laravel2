@@ -205,6 +205,8 @@ body{
     text-decoration: none;
     border-radius: 5px;
     font-size: 17px;
+    margin-bottom: 20px;
+    margin-left: 73px;
     transition: 1.2s;
 }
 .users header .logout:hover{
@@ -411,10 +413,8 @@ body{
     left: -40%;
 }
 
-/* Styl dla przycisków */
 .Btn {
     height: 45px;
-    border: none;
     color: #fff;
     font-size: 17px;
     background: #75359c;
@@ -422,6 +422,7 @@ body{
     cursor: pointer;
     margin-top: 13px;
     transition: 0.5s;
+    border: 1px solid #75359c;
 }
 
 .Btn:hover {
@@ -432,6 +433,7 @@ body{
 }
 
 .Btn:active {
+    border: 1px solid #75359c;
     background-color: rgb(146, 29, 154);
     color: rgb(255, 255, 255);
     transition: -0.5s;

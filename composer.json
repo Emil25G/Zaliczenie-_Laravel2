@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "caouecs/laravel-lang": "*",
+        "laravel-lang/lang": "~7.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9"
     },

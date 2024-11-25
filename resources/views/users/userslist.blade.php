@@ -17,10 +17,8 @@
                         <td>{{ $student->lname }}</td>
                         <td>{{ $student->email }}</td>
                         <td>
-                            <!-- Link do otwarcia modala z formularzem edycji -->
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $student->id }}">Edytuj</button>
 
-                            <!-- Link do usuwania użytkownika z potwierdzeniem -->
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $student->id }}">Edytuj</button>
                             <form action="{{ route('users.destroy', $student->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -29,7 +27,6 @@
                         </td>
                     </tr>
 
-                    <!-- Modal edycji -->
                     <div class="modal fade" id="editModal{{ $student->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $student->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

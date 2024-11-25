@@ -14,8 +14,6 @@
                         @csrf
                         <button type="submit" class="logout btn btn-danger">Wyloguj się</button>
                     </form>
-
-
                 </div>
             </header>
 
@@ -48,12 +46,20 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="announcements-tab" data-toggle="tab" href="#announcements" role="tab">Tablica ogłoszeń</a>
                     </li>
+                    @if (auth()->user()->role == 'admin')
                     <li class="nav-item">
-                        <a class="nav-link" id="other-tab" data-toggle="tab" href="#my-class" role="tab">Moja klasa</a>
+                        <a class="nav-link" id="other-tab" data-toggle="tab" href="#my-class" role="tab">Lista uczniów</a>
                     </li>
+                    @elseif (auth()->user()->role == 'nauczyciel')
+                        <li class="nav-item">
+                            <a class="nav-link" id="other-tab" data-toggle="tab" href="#my-class" role="tab">Moja klasa</a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->role == 'admin')
                     <li class="nav-item">
                         <a class="nav-link" id="add-catalogs" data-toggle="tab" href="#add-new-users" role="tab">Katalog indeksów</a>
                     </li>
+                    @endif
                 </ul>
 
                 <div class="tab-content">

@@ -1,35 +1,60 @@
-// Obsługa wpisywania w pasku wyszukiwania
-searchBar.onkeyup = () => {
-    let searchTerm = searchBar.value;
-    if (searchTerm != "") {
-        searchBar.classList.add("active");
-    } else {
-        searchBar.classList.remove("active");
-    }
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/users/search", true);
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            const response = JSON.parse(xhr.response); // Parsuj odpowiedź JSON
-            usersList.innerHTML = response.html; // Wstaw HTML
-        }
-    };
-    xhr.send("searchTerm=" + searchTerm);
-};
+document.addEventListener("DOMContentLoaded", () => {
+    const searchBar = document.querySelector("#searchUser");
+    const usersList = document.querySelector("#usersList");
 
-// Dynamiczne pobieranie listy użytkowników
-setInterval(() => {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/users/getUsers", true);
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            const response = JSON.parse(xhr.response); // Parsuj odpowiedź JSON
-            if (!searchBar.classList.contains("active")) { // Tylko wtedy, gdy pasek wyszukiwania nie jest aktywny
-                usersList.innerHTML = response.html; // Wstaw HTML
-            }
+    if (!searchBar || !usersList) {
+        console.error("Element #searchUser lub #usersList nie został znaleziony.");
+        return;
+    }
+
+    // Obsługa wyszukiwania w pasku
+    searchBar.onkeyup = () => {
+        let searchTerm = searchBar.value.trim();
+        if (searchTerm !== "") {
+            searchBar.classList.add("active");
+        } else {
+            searchBar.classList.remove("active");
         }
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/users/search", true);
+        xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    usersList.innerHTML = response.html;
+                } catch (error) {
+                    console.error("Błąd podczas parsowania odpowiedzi:", error);
+                }
+            }
+        };
+
+        xhr.onerror = () => console.error("Błąd podczas wysyłania żądania AJAX.");
+        xhr.send("searchTerm=" + encodeURIComponent(searchTerm));
     };
-    xhr.send();
-}, 5000); // Odświeżanie listy użytkowników co 5 sekund
+
+    // Dynamiczne odświeżanie listy użytkowników co 5 sekund
+    setInterval(() => {
+        if (searchBar.classList.contains("active")) return; // Nie odświeżaj, jeśli pasek wyszukiwania jest aktywny
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "/users/getUsers", true);
+
+        xhr.onload = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    usersList.innerHTML = response.html;
+                } catch (error) {
+                    console.error("Błąd podczas parsowania odpowiedzi:", error);
+                }
+            }
+        };
+
+        xhr.onerror = () => console.error("Błąd podczas pobierania listy użytkowników.");
+        xhr.send();
+    }, 5000); // Co 5 sekund
+});

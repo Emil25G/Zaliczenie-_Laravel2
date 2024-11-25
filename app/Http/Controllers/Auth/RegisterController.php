@@ -13,42 +13,32 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('auth.register'); // Wskazanie na widok rejestracji
+        return view('auth.register');
     }
 
     public function register(Request $request)
     {
-        // Walidacja danych formularza
-        $this->validator($request->all())->validate();
+        $input = $this->sanitizeInput($request->all());
+        $this->validator($input)->validate();
+        $index = UserIndex::where('index', $input['index_number'])->first();
 
-        // Sprawdzanie, czy numer indeksu już istnieje w tabeli UserIndex
-        $index = UserIndex::where('index', $request->input('index_number'))->first();
+        if (!$index) {
+            return back()->withErrors(['index_number' => 'Numer indeksu jest nieprawidłowy.']);
+        }
 
-        // Jeśli indeks istnieje i ma status 1, oznacza to, że został już użyty
-        if ($index && $index->status == 1) {
+        if ($index->status == 1) {
             return back()->withErrors(['index_number' => 'Numer indeksu został już użyty do rejestracji.']);
         }
 
-        // Tworzymy użytkownika
-        $user = $this->create($request->all(), $index);
+        $user = $this->create($input, $index);
 
-        // Jeśli numer indeksu nie istniał, tworzymy nowy rekord w tabeli UserIndex
-        if (!$index) {
-            UserIndex::create([
-                'index' => $request->input('index_number'),
-                'status' => 1, // Ustawiamy status jako 1, co oznacza, że indeks został już przypisany
-            ]);
-        } else {
-            // Jeśli numer indeksu istnieje, tylko aktualizujemy status
-            $index->status = 1;
-            $index->save();
-        }
+        $index->status = 1;
+        $index->save();
 
-        // Przekierowanie na stronę logowania
         return redirect()->route('login')->with('success', 'Zarejestrowano pomyślnie!');
     }
 
-    // Walidacja danych wejściowych
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -61,17 +51,12 @@ class RegisterController extends Controller
         ]);
     }
 
-    // Funkcja tworzenia użytkownika
     protected function create(array $data, $index)
     {
-        // Generowanie unikalnej nazwy pliku dla obrazu
-        $imageName = time().'.'.$data['image']->extension();
+        $imageName = time() . '.' . $data['image']->extension();
         $data['image']->move(public_path('images'), $imageName);
-
-        // Określanie roli na podstawie numeru indeksu
         $role = (substr($data['index_number'], 0, 3) === 'UCZ') ? 'uczeń' : 'nauczyciel';
 
-        // Tworzenie użytkownika i przypisanie danych
         return User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
@@ -79,7 +64,16 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => $role,
             'image' => $imageName,
-            'class_id' => $index ? $index->class_id : null,  // Przypisanie class_id, jeśli rekord UserIndex istnieje
+            'class_id' => $index->class_id,
         ]);
+    }
+    protected function sanitizeInput(array $data)
+    {
+        $data['fname'] = trim(strip_tags($data['fname']));
+        $data['lname'] = trim(strip_tags($data['lname']));
+        $data['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
+        $data['index_number'] = preg_replace('/[^a-zA-Z0-9]/', '', $data['index_number']);
+
+        return $data;
     }
 }

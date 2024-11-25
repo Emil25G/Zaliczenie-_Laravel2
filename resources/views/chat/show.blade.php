@@ -5,7 +5,7 @@
         <section class="chat-area">
             <header>
                 <?php
-                $user_id = $user->id; // ID użytkownika, z którym rozmawiamy
+                $user_id = $user->id;
                 ?>
                 <a href="{{ route('users.index') }}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
                 <img src="{{ asset('images/' . $user->image) }}" alt="">
