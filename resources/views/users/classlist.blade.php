@@ -7,7 +7,10 @@
                     <img src="{{ asset('images/' . $student->image) }}" alt="{{ $student->fname . ' ' . $student->lname }}" style="width: 25px; height: 25px;">
                     <div class="details">
                         <span>{{ $student->fname . ' ' . $student->lname }}</span>
-                        <p>{{ $student->status }}</p>
+                        <p>
+                            <span class="status-indicator {{ $user->status == 1 ? 'online' : 'offline' }}"></span>
+                            {{ $user->status == 1 ? 'Online' : 'Offline' }}
+                        </p>
                     </div>
                 </div>
             </a>

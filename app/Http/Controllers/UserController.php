@@ -85,23 +85,23 @@ class UserController extends Controller
         $outgoing_id = Auth::id();
         $users = User::where('id', '!=', $outgoing_id)->orderBy('id', 'DESC')->get();
 
-        // Generowanie HTML
         $output = '';
         foreach ($users as $user) {
             $output .= '
-            <a href="' . route('chat.show', $user->id) . '" class="user">
-                <div class="content">
-                    <img src="' . asset('images/' . $user->img) . '" alt="' . $user->fname . ' ' . $user->lname . '" style="width: 50px; height: 50px;">
-                    <div class="details">
-                        <span>' . $user->fname . ' ' . $user->lname . '</span>
-                        <p>' . $user->status . '</p>
-                    </div>
+        <a href="' . route('chat.show', $user->id) . '" class="user">
+            <div class="content">
+                <img src="' . asset('images/' . $user->img) . '" alt="' . $user->fname . ' ' . $user->lname . '" style="width: 50px; height: 50px;">
+                <div class="details">
+                    <span>' . $user->fname . ' ' . $user->lname . '</span>
+                    <p>' . $user->status . '</p>
                 </div>
-            </a>';
+            </div>
+        </a>';
         }
 
-        return response()->json(['html' => $output]); // Zwróć HTML jako JSON
+        return response()->json(['html' => $output]);
     }
+
 
     // Wyszukiwanie użytkowników na podstawie imienia/nazwiska
     public function search(Request $request)

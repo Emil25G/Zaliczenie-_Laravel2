@@ -8,7 +8,10 @@
                     <img src="{{ asset('images/' . $user->image) }}" alt="{{ $user->fname . ' ' . $user->lname }}" style="width: 75px; height: 75px;">
                     <div class="details">
                         <span>{{ $user->fname . ' ' . $user->lname }}</span>
-                        <p>{{ $user->status }}</p>
+                        <p>
+                            <span class="status-indicator {{ $user->status == 1 ? 'online' : 'offline' }}"></span>
+                            {{ $user->status == 1 ? 'Online' : 'Offline' }}
+                        </p>
                     </div>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -30,7 +33,10 @@
                             <img src="{{ asset('images/' . $user->image) }}" alt="{{ $user->fname . ' ' . $user->lname }}" style="width: 60px; height: 60px;">
                             <div class="details">
                                 <span>{{ $user->fname . ' ' . $user->lname }}</span>
-                                <p>{{ $user->status }}</p>
+                                <p>
+                                    <span class="status-indicator {{ $user->status == 1 ? 'online' : 'offline' }}"></span>
+                                    {{ $user->status == 1 ? 'Online' : 'Offline' }}
+                                </p>
                             </div>
                         </div>
                     </a>

@@ -56,7 +56,6 @@ class ChatController extends Controller
         }
     }
 
-    // Metoda do zapisywania wiadomości prywatnych
     public function savePrivateMessage(Request $request)
     {
         $request->validate([

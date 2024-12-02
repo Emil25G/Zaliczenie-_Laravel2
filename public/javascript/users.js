@@ -1,44 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
     const searchBar = document.querySelector("#searchUser");
     const usersList = document.querySelector("#usersList");
+    let users = usersList.querySelectorAll(".user");
 
     if (!searchBar || !usersList) {
-        console.error("Element #searchUser lub #usersList nie został znaleziony.");
         return;
     }
 
-    // Obsługa wyszukiwania w pasku
-    searchBar.onkeyup = () => {
-        let searchTerm = searchBar.value.trim();
+    searchBar.addEventListener("keyup", () => {
+        const searchTerm = searchBar.value.toLowerCase().trim();
+
+        users.forEach(user => {
+            const userName = user.querySelector(".details span").textContent.toLowerCase();
+            if (userName.includes(searchTerm)) {
+                user.style.display = "";
+            } else {
+                user.style.display = "none";
+            }
+        });
+
         if (searchTerm !== "") {
             searchBar.classList.add("active");
         } else {
             searchBar.classList.remove("active");
         }
+    });
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/users/search", true);
-        xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        xhr.onload = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    usersList.innerHTML = response.html;
-                } catch (error) {
-                    console.error("Błąd podczas parsowania odpowiedzi:", error);
-                }
-            }
-        };
-
-        xhr.onerror = () => console.error("Błąd podczas wysyłania żądania AJAX.");
-        xhr.send("searchTerm=" + encodeURIComponent(searchTerm));
-    };
-
-    // Dynamiczne odświeżanie listy użytkowników co 5 sekund
-    setInterval(() => {
-        if (searchBar.classList.contains("active")) return; // Nie odświeżaj, jeśli pasek wyszukiwania jest aktywny
+    const refreshInterval = setInterval(() => {
+        if (searchBar.value.trim() !== "") return;
 
         let xhr = new XMLHttpRequest();
         xhr.open("GET", "/users/getUsers", true);
@@ -48,13 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 try {
                     const response = JSON.parse(xhr.responseText);
                     usersList.innerHTML = response.html;
+
+                    users = usersList.querySelectorAll(".user");
                 } catch (error) {
-                    console.error("Błąd podczas parsowania odpowiedzi:", error);
                 }
             }
         };
 
-        xhr.onerror = () => console.error("Błąd podczas pobierania listy użytkowników.");
+        xhr.onerror = () => {};
         xhr.send();
-    }, 5000); // Co 5 sekund
+    }, 60000);
 });

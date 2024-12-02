@@ -108,7 +108,6 @@ body{
 
 .form form .button input:hover{
     background-color: rgb(255, 255, 255);
-    border: 1px solid #75359c;
     color: #75359c;
     transition: 0.5s;
 }
@@ -198,15 +197,15 @@ body{
 .users header .logout{
     display: block;
     background: #75359c;
+    border: 1px solid #75359c;
     color: #fff;
     outline: none;
-    border: none;
     padding: 7px 15px;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 17px;
+    border-radius: 7px;
+    font-size: 14px;
     margin-bottom: 20px;
-    margin-left: 73px;
+    margin-left: 80px;
     transition: 1.2s;
 }
 .users header .logout:hover{
@@ -291,119 +290,6 @@ body{
     height: 40px;
     width: 40px;
 }
-.users-list a .details p{
-    color: #67676a;
-}
-.users-list a .status-dot{
-    font-size: 12px;
-    color: #468669;
-    padding-left: 10px;
-}
-.users-list a .status-dot.offline{
-    color: #ccc;
-}
-
-/* Chat Area CSS Start */
-.chat-area header{
-    display: flex;
-    align-items: center;
-    padding: 18px 30px;
-}
-.chat-area header .back-icon{
-    color: #333;
-    font-size: 18px;
-}
-.chat-area header img{
-    height: 45px;
-    width: 45px;
-    margin: 0 15px;
-}
-.chat-area header .details span{
-    font-size: 17px;
-    font-weight: 500;
-}
-.chat-box{
-    position: relative;
-    min-height: 500px;
-    max-height: 500px;
-    overflow-y: auto;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    padding: 15px 30px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-}
-.chat-box::-webkit-scrollbar{
-    width: 7px;
-}
-.chat-box::-webkit-scrollbar-thumb{
-    background-color: #f0f0f0;
-    border-radius: 10px;
-}
-.chat-box::-webkit-scrollbar-track{
-    background-color: #fff;
-}
-.chat-box .chat{
-    display: flex;
-    margin-bottom: 15px;
-}
-.chat-box .chat.outgoing{
-    justify-content: flex-end;
-}
-.chat-box .chat .details{
-    position: relative;
-    background: #fff;
-    border-radius: 10px;
-    padding: 10px 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-}
-.chat-box .chat.outgoing .details{
-    background: #75359c;
-    color: #fff;
-}
-.chat-box .chat .details p{
-    font-size: 16px;
-    line-height: 25px;
-}
-.chat-area footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    padding: 15px 30px;
-    background-color: #fff;
-}
-.chat-area footer .input input{
-    height: 45px;
-    width: 100%;
-    font-size: 17px;
-    padding: 0 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-.chat-area footer .input button{
-    background: #75359c;
-    border: none;
-    padding: 10px 20px;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 10px;
-}
-.chat-area footer .input button:hover{
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #75359c;
-    color: #75359c;
-    transition: 0.5s;
-}
-
-.chat-area footer .input button:active{
-    background-color: rgb(146, 29, 154);
-    color: rgb(255, 255, 255);
-    transition: -0.5s;
-}
 
 .modal-content {
     background-color: #f1f1f1;
@@ -414,28 +300,39 @@ body{
 }
 
 .Btn {
-    height: 45px;
+    height: 40px;
     color: #fff;
-    font-size: 17px;
+    font-size: 14px;
     background: #75359c;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
     margin-top: 13px;
+    margin-left: 3px;
     transition: 0.5s;
     border: 1px solid #75359c;
 }
 
 .Btn:hover {
-    border: 1px solid #75359c;
     background: #ffffff;
     color: #75359c;
     transition: 0.5s;
 }
 
-.Btn:active {
-    border: 1px solid #75359c;
-    background-color: rgb(146, 29, 154);
-    color: rgb(255, 255, 255);
-    transition: -0.5s;
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 5px;
+    background-color: #bbb;
 }
 
+.status-indicator.online {
+    background-color: #4CAF50;
+}
+
+.status-indicator.offline {
+    background-color: #ccc;
+}
