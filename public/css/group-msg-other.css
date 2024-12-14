@@ -1,23 +1,36 @@
-
-#MyTable {
-    width:auto;
-    max-width: 700px;
-    min-width: 300px;
-    margin:auto;
-    overflow-y: 2px;
-
+#MyTableContainer {
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    margin-top: 20px;
 }
 
-#MyTable td {
+#MyTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#MyTable td, #MyTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
     word-wrap: break-word;
     white-space: normal;
+    text-overflow: ellipsis;
 }
 
 #MyTable th {
     background-color: #75359c;
     text-align: left;
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 #MyTable tr:nth-child(even) {
     background-color: #62149a;
+    color: white;
 }
+
+
+

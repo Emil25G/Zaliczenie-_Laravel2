@@ -1,4 +1,3 @@
-/* Stylowanie prawego panelu */
 .right-panel {
     position: fixed;
     top: 0;
@@ -17,7 +16,7 @@
     margin-top: 150px;
 }
 
-.tab-pane {
+.tab-panel {
     position: fixed;
 }
 

@@ -51,7 +51,6 @@
     position: relative;
 }
 
-/* Responsywność */
 @media (max-width: 768px) {
     .user-list-table thead {
         display: none;

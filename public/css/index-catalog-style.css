@@ -1,6 +1,8 @@
-#add-new-users{
+#add-new-users {
     top: 0;
     margin-top: 200px;
+    position: relative;
+    z-index: 1000;
 }
 
 #index-catalog {
@@ -10,12 +12,11 @@
     background-color: #ddd;
     border-style: hidden;
     color: black;
-    max-height: 320px;
-    max-width: 90%;
+    max-height: 350px;
+    max-width: 100%;
     overflow-y: auto;
     display: block;
-    position: relative;
-    margin-top: 0;
+    margin-top: -560px;
     padding-top: 0;
 }
 
@@ -25,7 +26,9 @@
     word-wrap: break-word;
     text-align: center;
     white-space: nowrap;
+    width: 33%;
 }
+
 
 
 #index-catalog td:nth-child(2) {

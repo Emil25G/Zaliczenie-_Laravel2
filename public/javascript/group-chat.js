@@ -62,3 +62,5 @@ document.addEventListener('DOMContentLoaded', function () {
     // Odświeżanie wiadomości co 2 sekundy
     setInterval(loadMessages, 2000);
 });
+
+

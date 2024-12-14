@@ -106,10 +106,9 @@ class UserController extends Controller
     // Wyszukiwanie użytkowników na podstawie imienia/nazwiska
     public function search(Request $request)
     {
-        $outgoing_id = Auth::id(); // ID aktualnie zalogowanego użytkownika
+        $outgoing_id = Auth::id();
         $searchTerm = $request->searchTerm;
 
-        // Wyszukiwanie użytkowników, którzy nie są zalogowanym użytkownikiem
         $users = User::where('id', '!=', $outgoing_id)
             ->where(function($query) use ($searchTerm) {
                 $query->where('fname', 'LIKE', "%{$searchTerm}%")
@@ -117,15 +116,12 @@ class UserController extends Controller
             })
             ->get();
 
-        return view('users.data', compact('users'))->render(); // Renderujemy wynik wyszukiwania
+        return view('users.data', compact('users'))->render();
     }
 
     public function destroy(User $user)
     {
-        // Usuwamy użytkownika
         $user->delete();
-
-        // Przekierowanie po usunięciu, np. na stronę z listą użytkowników
         return redirect()->route('users.index')->with('success', 'Użytkownik został usunięty.');
     }
 
@@ -164,7 +160,7 @@ class UserController extends Controller
             }
         }
 
-        return response()->json(['message' => 'Indeksy użytkowników zostały zapisane.']);
+        return redirect()->route('users.index')->with('success', 'Indeksy zostały zapisane!');
     }
 
 
