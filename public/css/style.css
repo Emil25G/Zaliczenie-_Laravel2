@@ -293,9 +293,8 @@ body{
 .modal-content {
     background-color: #f1f1f1;
     padding: 20px;
-    width: 180%;
-    position: absolute;
-    left: -40%;
+    border-radius: 20px;
+    position: marker;
 }
 
 .Btn {
