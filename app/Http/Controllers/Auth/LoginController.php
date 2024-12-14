@@ -12,7 +12,11 @@ class LoginController extends Controller
     // Metoda do wyświetlania formularza logowania
     public function showLoginForm()
     {
-        return view('auth.login'); // Upewnij się, że ścieżka do widoku jest poprawna
+        if (Auth::check()) {
+            return redirect()->route('users.index');
+        }
+
+        return view('auth.login');
     }
 
     // Metoda do logowania
@@ -23,15 +27,11 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        // Zbieranie danych logowania
         $credentials = $request->only('email', 'password');
 
-        // Próbuj zalogować użytkownika
         if (Auth::attempt($credentials)) {
-            // Logowanie udane
             Log::info('Użytkownik zalogowany: ' . $request->email);
-            return redirect()->route('users.index'); // Użycie nazwy trasy
+            return redirect()->route('users.index');
         }
 
         // Logowanie nie powiodło się
@@ -45,6 +45,6 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login'); // Przekieruj na stronę logowania
+        return redirect('/login');
     }
 }

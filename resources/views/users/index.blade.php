@@ -77,9 +77,11 @@
                         </div>
                         <input type="submit" name="save" class="btn send" value="Wyślij" id="butsave">
                         <h2>Tablica ogłoszeń:</h2>
-                        <table class="table" id="MyTable">
-                            <tbody id="record"></tbody>
-                        </table>
+                        <div id="MyTableContainer">
+                            <table class="table" id="MyTable">
+                                <tbody id="record"></tbody>
+                            </table>
+                        </div>
                         <link rel="stylesheet" href="{{ asset('css/group-msg-other.css') }}">
                     </div>
             @endif
@@ -104,5 +106,5 @@
 <script src="{{ asset('javascript/users.js') }}"></script>
 <script src="{{ asset('javascript/group-chat.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
