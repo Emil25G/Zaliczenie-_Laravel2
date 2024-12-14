@@ -30,6 +30,11 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            // Zaktualizuj status użytkownika na 1 (online)
+            $user = Auth::user();
+            $user->status = 1;
+            $user->save();
+
             Log::info('Użytkownik zalogowany: ' . $request->email);
             return redirect()->route('users.index');
         }
@@ -44,6 +49,13 @@ class LoginController extends Controller
     // Metoda do wylogowywania
     public function logout(Request $request)
     {
+        // Zaktualizuj status użytkownika na 0 (offline) przed wylogowaniem
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->status = 0;
+            $user->save();
+        }
+
         Auth::logout();
         return redirect('/login');
     }
