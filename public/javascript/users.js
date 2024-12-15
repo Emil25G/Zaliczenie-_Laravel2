@@ -46,5 +46,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
         xhr.onerror = () => {};
         xhr.send();
-    }, 60000);
+    }, 100000);
 });

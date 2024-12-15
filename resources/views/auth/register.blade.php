@@ -33,8 +33,6 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Numer indeksu zamiast roli -->
                 <div class="field input">
                     <label>Numer indeksu</label>
                     <input type="text" name="index_number" placeholder="Podaj numer indeksu" required value="{{ old('index_number') }}">
