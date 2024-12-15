@@ -1,4 +1,4 @@
-@extends('layouts.app') <!-- Assuming you have a layout file -->
+@extends('layouts.app')
 
 @section('content')
     <div class="wrapper">
@@ -25,5 +25,5 @@
         </section>
     </div>
 
-    <script src="{{ asset('javascript/chat.js') }}"></script> <!-- Skrypt do obsługi czatu -->
+    <script src="{{ asset('javascript/chat.js') }}"></script>
 @endsection

@@ -77,7 +77,7 @@ class UserController extends Controller
         $students = null;
     }
         // Przekierowanie do widoku 'users.index', gdzie wyświetlamy informacje o użytkowniku
-        return view('users.index', compact('user', 'users', 'students')); // Przekazanie zmiennych do widoku
+        return view('users.index', compact('user', 'users', 'students'));
     }
 
     public function getUsers()

@@ -39,7 +39,6 @@ class LoginController extends Controller
             return redirect()->route('users.index');
         }
 
-        // Logowanie nie powiodło się
         Log::warning('Nieudana próba logowania dla: ' . $request->email);
         return back()->withErrors([
             'email' => 'Podany adres email lub hasło są nieprawidłowe.',

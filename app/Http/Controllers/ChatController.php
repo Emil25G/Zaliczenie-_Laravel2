@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Message; // Upewnij się, że model Message jest zaimportowany
+use App\Models\Message;
 use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
@@ -13,18 +13,18 @@ class ChatController extends Controller
     // Metoda wyświetlająca czat z użytkownikiem
     public function show($id)
     {
-        $user = User::findOrFail($id); // Pobierz użytkownika po ID
-        return view('chat', compact('user')); // Przekaż użytkownika do widoku czatu
+        $user = User::findOrFail($id);
+        return view('chat', compact('user'));
     }
 
     // Metoda do zapisywania wiadomości (grupowe)
     public function saveMessage(Request $request)
     {
         $request->validate([
-            'msg' => 'required|string|max:255', // Walidacja wiadomości
+            'msg' => 'required|string|max:255',
         ]);
 
-        $userId = Auth::id(); // Identyfikator zalogowanego użytkownika
+        $userId = Auth::id();
         $message = $request->input('msg');
 
         DB::table('group_messages')->insert([
